@@ -976,11 +976,33 @@ let input = [13,
   71889]
 
 const calcFreq = (startFreq, inputFreqs) => {
-  let total = startFreq
+  let total = startFreq;
   for (let i = 0; i < inputFreqs.length; i++) {
-    total += inputFreqs[i]
+    total += inputFreqs[i];
   }
   return total
 }
+
+const findFirstFreqRepeat = (startFreq, inputFreqs) => {
+  let total = startFreq;
+  let freqs = { total: true };
+  let repeated = false;
+  while (!repeated) {
+    for (let i = 0; i < inputFreqs.length; i++) {
+      total += inputFreqs[i];
+      if (freqs[total]) {
+        repeated = true;
+        return total;
+      }
+      freqs[total] = true;
+      if (i === inputFreqs.length - 1) {
+        i = -1;
+      }
+    }
+  }
+  return total;
+}
+
+console.log(findFirstFreqRepeat(0, input))
 
 console.log(calcFreq(0, input))
